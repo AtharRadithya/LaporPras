@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Str;
 
+$tempSessions = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'laporpras_sessions';
+if (!is_dir($tempSessions)) {
+    @mkdir($tempSessions, 0777, true);
+}
+
 return [
 
     /*
@@ -60,7 +65,7 @@ return [
     |
     */
 
-    'files' => storage_path('framework/sessions'),
+    'files' => env('SESSION_FILES_PATH', $tempSessions),
 
     /*
     |--------------------------------------------------------------------------
